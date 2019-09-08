@@ -50,7 +50,7 @@ public class BoardPanel extends JPanel {
         for (boolean i : boardMap) {
             g.setColor(Values.COLORS[cont % Values.COLORS.length]);
             if (i) {
-                //g.fillArc(0, 0, size, size, total_angule, angule);
+                g.fillArc(0, 0, size, size, total_angule, angule);
                 cont++;
             }
 
