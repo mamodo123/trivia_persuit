@@ -12,6 +12,7 @@ public class Screen extends JFrame {
 
     public Screen() {
         this.setTitle(Values.APP_NAME);
+        setImage();
 
         setConfig();
         setSize();
@@ -19,6 +20,12 @@ public class Screen extends JFrame {
 
         this.getContentPane().setBackground(Values.BG_COLOR);
         this.setVisible(true);
+    }
+
+    private void setImage() {
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/res/images/triviando.png"));
+        ImageIcon icon = new ImageIcon(image);
+        setIconImage(icon.getImage());
     }
 
     private void setSize() {
