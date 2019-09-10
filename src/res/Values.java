@@ -20,6 +20,6 @@ public abstract class Values {
     public static final Color BG_COLOR = Color.BLACK;
     public final static int STROKE = 200;
 
-    public final static int[] PLAYERS = {2, 1};
+    public final static int[] PLAYERS = {5, 8};
 
 }

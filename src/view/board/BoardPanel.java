@@ -93,17 +93,24 @@ public class BoardPanel extends JPanel {
         final var stroke_size = Values.STROKE / 2;
         final var map = Helper.agrup_array(Values.PLAYERS);
         final int size = state.getWidth();
-        g.setColor(Color.CYAN);
+        //TODO
+        var cont = 0;
+        //
         for (int posicao : map.keySet()) {
             var quantity = map.get(posicao);
 
             int size_quantity = stroke_size / (quantity);
             for (int i = 0; i < quantity; i++) {
+                g.setColor(Color.CYAN);
                 final var a = Math.toRadians(angule * posicao + (angule >> 1));
                 final var b = size - size_quantity * i * 2 - stroke_size / quantity;
                 final var endXPiece = (size + b * Math.cos(a)) / 2;
                 final var endYPiece = (size - b * Math.sin(a)) / 2;
                 g.fillOval((int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2, size_quantity, size_quantity);
+                //TODO
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Helvetica",Font.PLAIN,20));
+                g.drawString("Jogador: " + (++cont), (int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2 + size_quantity / 2);
             }
 
         }
