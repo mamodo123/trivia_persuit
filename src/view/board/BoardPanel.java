@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
 
 public class BoardPanel extends JPanel {
 
@@ -41,11 +43,11 @@ public class BoardPanel extends JPanel {
         final int size = boardImage.getWidth();
         g.fillOval(0, 0, size, size);
 
-        final var boardMap = this.board.getBoardMap();
-        final var angule = 360 / boardMap.length;
-        var total_angule = 0;
+        final boolean[] boardMap = this.board.getBoardMap();
+        final int angule = 360 / boardMap.length;
+        int total_angule = 0;
 
-        var cont = 0;
+        int cont = 0;
 
         for (boolean i : boardMap) {
             g.setColor(Values.COLORS[cont % Values.COLORS.length]);
@@ -54,8 +56,8 @@ public class BoardPanel extends JPanel {
                 cont++;
             }
 
-            final var endX = size / 2 + size / 2 * Math.cos(Math.toRadians(total_angule));
-            final var endY = size / 2 + size / 2 * Math.sin(Math.toRadians(total_angule));
+            final double endX = (size >> 1) + (size >> 1) * Math.cos(Math.toRadians(total_angule));
+            final double endY = (size >> 1) + (size >> 1) * Math.sin(Math.toRadians(total_angule));
 
             g.setColor(Values.LINES);
             g.drawLine(size / 2, size / 2, (int) endX, (int) endY);
@@ -68,7 +70,7 @@ public class BoardPanel extends JPanel {
 
 
         try {
-            var url = getClass().getResource("/res/images/trivial_logo.png");
+            URL url = getClass().getResource("/res/images/trivial_logo.png");
             if (url != null) {
                 BufferedImage img = ImageIO.read(url);
                 g.drawImage(img, ((int) dimension.getWidth() - img.getWidth()) / 2, ((int) dimension.getHeight() - img.getHeight()) / 2, null);
@@ -78,8 +80,8 @@ public class BoardPanel extends JPanel {
         }
 
         //TODO
-        final var start_x = size / 2 + (size - Values.STROKE) / 2 * Math.cos(Math.toRadians(angule >> 1));
-        final var start_y = size / 2 - (size - Values.STROKE) / 2 * Math.sin(Math.toRadians(angule >> 1));
+        final double start_x = (size >> 1) + ((size - Values.STROKE) >> 1) * Math.cos(Math.toRadians(angule >> 1));
+        final double start_y = (size >> 1) - ((size - Values.STROKE) >> 1) * Math.sin(Math.toRadians(angule >> 1));
         g.setFont(new Font("Helvetica",Font.BOLD,24));
         g.drawString("INÍCIO", (int) start_x + 10, (int) start_y);
     }
@@ -89,23 +91,23 @@ public class BoardPanel extends JPanel {
         Graphics2D g = (Graphics2D) state.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        final var angule = 360 / board.getBoardMap().length;
-        final var stroke_size = Values.STROKE / 2;
-        final var map = Helper.agrup_array(Values.PLAYERS);
+        final int angule = 360 / board.getBoardMap().length;
+        final int stroke_size = Values.STROKE / 2;
+        final HashMap<Integer, Integer> map = Helper.agrup_array(Values.PLAYERS);
         final int size = state.getWidth();
         //TODO
-        var cont = 0;
+        int cont = 0;
         //
         for (int posicao : map.keySet()) {
-            var quantity = map.get(posicao);
+            int quantity = map.get(posicao);
 
             int size_quantity = stroke_size / (quantity);
             for (int i = 0; i < quantity; i++) {
                 g.setColor(Color.CYAN);
-                final var a = Math.toRadians(angule * posicao + (angule >> 1));
-                final var b = size - size_quantity * i * 2 - stroke_size / quantity;
-                final var endXPiece = (size + b * Math.cos(a)) / 2;
-                final var endYPiece = (size - b * Math.sin(a)) / 2;
+                final double a = Math.toRadians(angule * posicao + (angule >> 1));
+                final int b = size - size_quantity * i * 2 - stroke_size / quantity;
+                final double endXPiece = (size + b * Math.cos(a)) / 2;
+                final double endYPiece = (size - b * Math.sin(a)) / 2;
                 g.fillOval((int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2, size_quantity, size_quantity);
                 //TODO
                 g.setColor(Color.BLACK);

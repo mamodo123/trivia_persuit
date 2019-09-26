@@ -5,6 +5,8 @@ import view.board.BoardPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Screen extends JFrame {
@@ -49,11 +51,14 @@ public class Screen extends JFrame {
         ct.setPreferredSize(new Dimension(50, 0));
         this.add(ct);
 
-        var button = new JButton("Rolar o dado");
-        button.addActionListener((v) -> {
-            Random gerador = new Random();
-            var random = gerador.nextInt(6);
-            JOptionPane.showMessageDialog(null, "Você rolou o dado: " + (random + 1));
+        JButton button = new JButton("Rolar o dado");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Random gerador = new Random();
+                int random = gerador.nextInt(6);
+                JOptionPane.showMessageDialog(null, "Você rolou o dado: " + (random + 1));
+            }
         });
 
         this.add(button);

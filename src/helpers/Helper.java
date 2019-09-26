@@ -6,7 +6,11 @@ public abstract class Helper {
     public static HashMap<Integer, Integer> agrup_array (int[] array){
         HashMap<Integer, Integer> return_array = new HashMap<>();
         for (int i : array) {
-            return_array.put(i, return_array.getOrDefault(i, 0) + 1);
+            Integer value = return_array.get(i);
+            if (value == null) {
+                value = 0;
+            }
+            return_array.put(i, value + 1);
         }
         return return_array;
     }
