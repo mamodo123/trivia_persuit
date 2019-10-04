@@ -11,5 +11,6 @@ public class AtorNetGames implements OuvidorProxy {
     public boolean conectar(String servidor, String nome) {
         // TODO verificar se o metodo levanta excecoes ou algo parecido
         this.proxy.conectar(servidor, nome);
+        return true;
     }
 }
