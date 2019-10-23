@@ -82,8 +82,8 @@ public class BoardPanel extends JPanel {
         //TODO
         final double start_x = (size >> 1) + ((size - Values.STROKE) >> 1) * Math.cos(Math.toRadians(angule >> 1));
         final double start_y = (size >> 1) - ((size - Values.STROKE) >> 1) * Math.sin(Math.toRadians(angule >> 1));
-        g.setFont(new Font("Helvetica",Font.BOLD,24));
-        g.drawString("INÍCIO", (int) start_x + 10, (int) start_y);
+        g.setFont(new Font("Helvetica", Font.BOLD,24));
+        g.drawString("INICIO", (int) start_x + 10, (int) start_y);
     }
 
     private void updateState() {
