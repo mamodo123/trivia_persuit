@@ -1,4 +1,4 @@
-package view.board;
+package InterfaceGrafica.view.board;
 
 import helpers.Helper;
 import model.Board;
