@@ -162,7 +162,7 @@ public class Screen {
 			public void actionPerformed(ActionEvent actionEvent) {
 				Random gerador = new Random();
 				int random = gerador.nextInt(6);
-				JOptionPane.showMessageDialog(null, "Você rolou o dado: " + (random + 1));
+				JOptionPane.showMessageDialog(null, "Voce rolou o dado: " + (random + 1));
 			}
 		});
 

@@ -27,17 +27,17 @@ public class ElementoDominioProblema {
 	
 	public boolean permitidoConectar() {
 		return !conectado;
-		// defina a lógica do seu jogo
+		// defina a logica do seu jogo
 	}
 	
 	public boolean permitidoDesconectar() {
 		return conectado;
-		// defina a lógica do seu jogo
+		// defina a logica do seu jogo
 	}
 
 	public boolean permitidoIniciarPartida() {
 		return !partidaAndamento;
-		// defina a lógica do seu jogo
+		// defina a logica do seu jogo
 	}
 
 
