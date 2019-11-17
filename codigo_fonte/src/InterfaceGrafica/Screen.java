@@ -1,19 +1,19 @@
 package InterfaceGrafica;
 
 import InterfaceGrafica.view.board.BoardPanel;
+import model.Player;
 import res.Values;
 
-import java.awt.*;
-
 import javax.swing.*;
-
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Screen {
 
 	private JFrame frame;
+	private BoardPanel game_panel;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private final Action action_2 = new SwingAction_2();
@@ -21,26 +21,16 @@ public class Screen {
 
 	private Dimension screenSize;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Screen window = new Screen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private ActionListener random_listener;
 
 	/**
 	 * Create the application.
+	 * @param random_listener
 	 */
-	public Screen() {
+	public Screen(ActionListener random_listener) {
+
+		this.random_listener = random_listener;
+
 		initialize();
 	}
 
@@ -150,22 +140,24 @@ public class Screen {
 
 	private void setComponents() {
 		frame.setLayout(new FlowLayout(FlowLayout.CENTER));
-		frame.add(new BoardPanel(new Dimension((int) (screenSize.getWidth() * 0.9), (int) (screenSize.getHeight() * 0.9))));
+		game_panel = new BoardPanel(new Dimension((int) (screenSize.getWidth() * 0.9), (int) (screenSize.getHeight() * 0.9)));
+		frame.add(game_panel);
 
 		Container ct = new Container();
 		ct.setPreferredSize(new Dimension(50, 0));
 		frame.add(ct);
 
 		JButton button = new JButton("Rolar o dado");
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				Random gerador = new Random();
-				int random = gerador.nextInt(6);
-				JOptionPane.showMessageDialog(null, "Você rolou o dado: " + (random + 1));
-			}
-		});
+		button.addActionListener(random_listener);
 
 		frame.add(button);
+	}
+
+	public void updateState(ArrayList<Player> players) {
+		game_panel.updateState(players);
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 }

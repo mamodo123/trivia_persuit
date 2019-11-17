@@ -3,6 +3,7 @@ package InterfaceGrafica.view.board;
 import helpers.Helper;
 import model.Board;
 import model.BoardFactory;
+import model.Player;
 import res.Values;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BoardPanel extends JPanel {
@@ -29,7 +31,6 @@ public class BoardPanel extends JPanel {
         this.setBackground(Values.BG_COLOR);
 
         drawImage();
-        updateState();
 
     }
 
@@ -86,20 +87,22 @@ public class BoardPanel extends JPanel {
         g.drawString("INICIO", (int) start_x + 10, (int) start_y);
     }
 
-    private void updateState() {
+    public void updateState(ArrayList<Player> players) {
         this.state = new BufferedImage(this.dimension.width, this.dimension.height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D) state.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         final int angule = 360 / board.getBoardMap().length;
         final int stroke_size = Values.STROKE / 2;
-        final HashMap<Integer, Integer> map = Helper.agrup_array(Values.PLAYERS);
+        final HashMap<Integer, ArrayList<Player>> map = Helper.agrup_array(players);
+        System.out.println("");
         final int size = state.getWidth();
         //TODO
         int cont = 0;
         //
         for (int posicao : map.keySet()) {
-            int quantity = map.get(posicao);
+            ArrayList<Player> players_by_position = map.get(posicao);
+            int quantity = players_by_position.size();
 
             int size_quantity = stroke_size / (quantity);
             for (int i = 0; i < quantity; i++) {
@@ -112,10 +115,12 @@ public class BoardPanel extends JPanel {
                 //TODO
                 g.setColor(Color.BLACK);
                 g.setFont(new Font("Helvetica",Font.PLAIN,20));
-                g.drawString("Jogador: " + (++cont), (int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2 + size_quantity / 2);
+                Player player = players_by_position.get(i);
+                g.drawString(player.getName(), (int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2 + size_quantity / 2);
             }
 
         }
+        repaint();
     }
 
     @Override
