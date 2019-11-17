@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="codigo_fonte:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/codigo_fonte_jar</output-path>
+    <root id="archive" name="codigo_fonte.jar">
+      <element id="module-output" name="codigo_fonte" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/codigo_fonte/src/netgames/ngnrtFramework.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
