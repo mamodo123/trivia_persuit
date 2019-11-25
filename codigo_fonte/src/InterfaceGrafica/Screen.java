@@ -14,10 +14,9 @@ public class Screen {
 
 	private JFrame frame;
 	private BoardPanel game_panel;
-	private final Action action = new SwingAction();
-	private final Action action_1 = new SwingAction_1();
-	private final Action action_2 = new SwingAction_2();
-	private AtorJogador atorJogador;
+	private Action action;
+	private Action action_1;
+	private Action action_2;
 
 	private Dimension screenSize;
 
@@ -27,9 +26,12 @@ public class Screen {
 	 * Create the application.
 	 * @param random_listener
 	 */
-	public Screen(ActionListener random_listener) {
+	public Screen(ActionListener random_listener, Action action, Action action_1, Action action_2) {
 
 		this.random_listener = random_listener;
+		this.action = action;
+		this.action_1 = action_1;
+		this.action_2 = action_2;
 
 		initialize();
 	}
@@ -38,7 +40,6 @@ public class Screen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		atorJogador = new AtorJogador();
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -65,50 +66,6 @@ public class Screen {
 		mnNewMenu.add(mntmIniciarPartida);
 
 		setScreen();
-	}
-	private class SwingAction extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		public SwingAction() {
-			putValue(NAME, "conectar");
-			putValue(SHORT_DESCRIPTION, "conectar a Netgames Server");
-		}
-		public void actionPerformed(ActionEvent e) {
-			String servidor = JOptionPane.showInputDialog("Qual o servidor?");
-			String name = JOptionPane.showInputDialog("Qual o seu nome?");
-			String mensagem = atorJogador.conectar(servidor, name);
-			JOptionPane.showMessageDialog(null, mensagem);
-		}
-	}
-	private class SwingAction_1 extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		public SwingAction_1() {
-			putValue(NAME, "desconectar");
-			putValue(SHORT_DESCRIPTION, "desconectar de Netgames Server");
-		}
-		public void actionPerformed(ActionEvent e) {
-			String mensagem = atorJogador.desconectar();
-			JOptionPane.showMessageDialog(null, mensagem);
-		}
-	}
-	private class SwingAction_2 extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		public SwingAction_2() {
-			putValue(NAME, "iniciar partida");
-			putValue(SHORT_DESCRIPTION, "iniciar partida do seu jogo");
-		}
-		public void actionPerformed(ActionEvent e) {
-			String mensagem = atorJogador.iniciarPartida();
-			JOptionPane.showMessageDialog(null, mensagem);
-		}
 	}
 
 	private void setScreen() {

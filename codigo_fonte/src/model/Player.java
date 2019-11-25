@@ -1,6 +1,8 @@
 package model;
 
-public class Player {
+import br.ufsc.inf.leobr.cliente.Jogada;
+
+public class Player implements Jogada {
     private String name;
     private int board_position;
 

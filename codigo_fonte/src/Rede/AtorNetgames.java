@@ -25,15 +25,12 @@ public class AtorNetgames implements OuvidorProxy {
 			try {
 				proxy.conectar(servidor, nome);
 			} catch (JahConectadoException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return "Voce ja esta conectado";
 			} catch (NaoPossivelConectarException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return "Nao foi possivel conectar";
 			} catch (ArquivoMultiplayerException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return "Voce esqueceu o arquivo de propriedades";
 			}
@@ -45,9 +42,8 @@ public class AtorNetgames implements OuvidorProxy {
 			try {
 				proxy.desconectar();
 			} catch (NaoConectadoException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return "Voce nao esta conectado";
+				return "Voce não está conectado";
 			}
 			return "Sucesso: desconectado de Netgames Server";
 	}
@@ -56,17 +52,16 @@ public class AtorNetgames implements OuvidorProxy {
 		try {
 			proxy.iniciarPartida(new Integer(2)); // supondo 2 jogadores, o que pode ser alterado
 		} catch (NaoConectadoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "Falha ao tentar enviar solicitacao de inicio enviada a Netgames Server";
 		}
-		return "Sucesso: solicitacao de inicio enviada a Netgames Server";
+		return "Sucesso: solicitação de inicio enviada a Netgames Server";
 	}
 
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, "o servidor enviou solicitacao de inicio de partida e isso deve ser tratado segundo as regras do seu jogo");
+		JOptionPane.showMessageDialog(null, "O servidor enviou solicitação de início de partida e isso deve ser tratado segundo as regras do seu jogo");
 	}
 
 	@Override

@@ -1,21 +1,23 @@
 package model;
 
-public class Move {
-    private int player;
+import br.ufsc.inf.leobr.cliente.Jogada;
+
+public class Move implements Jogada {
+    private Player player;
     private int dice_value;
     private boolean direction;
 
-    public Move(int player, int dice_value, boolean direction) {
+    public Move(Player player, int dice_value, boolean direction) {
         this.player = player;
         this.dice_value = dice_value;
         this.direction = direction;
     }
 
-    public int getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(int player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
