@@ -6,6 +6,7 @@ public class Move implements Jogada {
     private Player player;
     private int dice_value;
     private boolean direction;
+    private Question question;
 
     public Move(Player player, int dice_value, boolean direction) {
         this.player = player;
@@ -35,5 +36,13 @@ public class Move implements Jogada {
 
     public void setDirection(boolean direction) {
         this.direction = direction;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }

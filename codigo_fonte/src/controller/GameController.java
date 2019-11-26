@@ -11,6 +11,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import model.Board;
 import model.Move;
 import model.Player;
+import model.Question;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +62,7 @@ public class GameController {
                 });
 
                 for (String i : names) {
-                    players.add(new Player(i, 0));
+                    players.add(new Player(i));
                 }
 
                 gameState.setCurrent_player(players.get(0));
@@ -97,6 +98,7 @@ public class GameController {
                     if (gameState.getCurrent_player().getName().equals(proxy.getNomeJogador())) {
                         Random gerador = new Random();
                         int random = gerador.nextInt(6) + 1;
+                        random = 5;
                         JOptionPane.showMessageDialog(null, gameState.getCurrent_player().getName() + " rolou o dado: " + (random));
                         String[] buttons = {"Esquerda", "Direita"};
                         boolean direcao = JOptionPane.showOptionDialog(null,
@@ -124,10 +126,21 @@ public class GameController {
 
                             String question = (String) mquestion.get("question");
                             int answer = ((Double) mquestion.get("correct_answer")).intValue() - 1;
-                            ArrayList<String> options = (ArrayList<String>) mquestion.get("answers");
-                            JOptionPane.showMessageDialog(null, question);
+                            String[] options = ((ArrayList<String>) mquestion.get("answers")).toArray(new String[0]);
+
+                            int resp = JOptionPane.showOptionDialog(null,
+                                    question,
+                                    "Pergunta!",
+                                    JOptionPane.DEFAULT_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    options,
+                                    buttons[0]);
+
+                            Question quest = new Question(category, question, options[answer], options[resp], resp == answer);
+                            move.setQuestion(quest);
                         }
-                        updateCurrent();
+                        updateCurrent(move.getQuestion());
 
                         try {
                             proxy.enviaJogada(move);
@@ -153,7 +166,7 @@ public class GameController {
 
     private void updateState(Move move) {
         updateBoard(move);
-        updateCurrent();
+        updateCurrent(move.getQuestion());
     }
 
     private void updateBoard(Move move) {
@@ -169,11 +182,31 @@ public class GameController {
         screen.updateState(players);
     }
 
-    private void updateCurrent() {
+    private void updateCurrent(Question question) {
         Player current = gameState.getCurrent_player();
+        Proxy proxy = Proxy.getInstance();
+        if (question != null) {
+            String text = "";
+            if (gameState.getCurrent_player().getName().equals(proxy.getNomeJogador())) {
+                text += "Você";
+            } else {
+                text += gameState.getCurrent_player().getName();
+            }
+            if (question.isAcertou()) {
+                gameState.getCurrent_player().getCategorys().add(question.getCategory());
+                text += " acertou!";
+            } else {
+                text += " errou!";
+            }
+
+            text += "\nPergunta respondida: " + question.getQuestion()
+                    + "\nResposta dada: " + question.getAnswer()
+                    + "\nResposta correta: " + question.getRight_answer();
+            JOptionPane.showMessageDialog(null, text);
+        }
+
         int novo = (players.indexOf(current) + 1) % players.size();
         gameState.setCurrent_player(players.get(novo));
-        Proxy proxy = Proxy.getInstance();
         if (gameState.getCurrent_player().getName().equals(proxy.getNomeJogador())) {
             JOptionPane.showMessageDialog(null, "Sua vez de jogar!");
         }
