@@ -6,6 +6,10 @@ import Rede.AtorNetgames;
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.Proxy;
 import br.ufsc.inf.leobr.cliente.exception.NaoJogandoException;
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import model.Board;
+import model.BoardFactory;
 import model.Move;
 import model.Player;
 
@@ -13,18 +17,32 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.*;
 
 public class GameController {
 
     private Screen screen;
     private State gameState;
     private ArrayList<Player> players;
+    private Map<String, Object> questions;
 
     private AtorJogador atorJogador;
     private boolean em_partida = false;
+
     private GameController() {
+        File file = new File(
+                getClass().getResource("/res/questions.txt").getFile()
+        );
+
+        try (Scanner scanner = new Scanner(file,"utf-8")) {
+            String json = scanner.useDelimiter("\\A").next();
+            questions = new Gson().fromJson(json, Map.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         AtorNetgames ator_netgames = new AtorNetgames() {
             @Override
@@ -63,6 +81,11 @@ public class GameController {
             public void receberJogada(Jogada jogada) {
                 updateState((Move) jogada);
             }
+
+            @Override
+            public void receberMensagem(String msg) {
+                JOptionPane.showMessageDialog(null, msg);
+            }
         };
 
         atorJogador = new AtorJogador(ator_netgames);
@@ -75,6 +98,7 @@ public class GameController {
                     if (gameState.getCurrent_player().getName().equals(proxy.getNomeJogador())) {
                         Random gerador = new Random();
                         int random = gerador.nextInt(6) + 1;
+                        random = 5;
                         JOptionPane.showMessageDialog(null, gameState.getCurrent_player().getName() + " rolou o dado: " + (random));
                         String[] buttons = {"Esquerda", "Direita"};
                         boolean direcao = JOptionPane.showOptionDialog(null,
@@ -87,7 +111,25 @@ public class GameController {
                                 buttons[0]) == 1;
                         Move move = new Move(gameState.getCurrent_player(), random, direcao);
 
-                        updateState(move);
+                        updateBoard(move);
+                        Board board = gameState.getBoard();
+                        int position = gameState.getCurrent_player().getBoard_position();
+                        String category = board.getBoardMap()[position];
+                        if (category != null) {
+                            JOptionPane.showMessageDialog(null, "Você tirou " + category + "!");
+                            System.out.println(category);
+                            ArrayList<Object> mcat = (ArrayList<Object>) questions.get(category);
+                            System.out.println(mcat);
+                            int qrandom = gerador.nextInt(mcat.size());
+                            System.out.println(mcat.get(qrandom));
+                            HashMap<String, Object> mquestion = new HashMap<>((LinkedTreeMap)mcat.get(qrandom));
+
+                            String question = (String) mquestion.get("question");
+                            int answer = ((Double) mquestion.get("correct_answer")).intValue() - 1;
+                            ArrayList<String> options = (ArrayList<String>) mquestion.get("answers");
+                            JOptionPane.showMessageDialog(null, question);
+                        }
+                        updateCurrent();
 
                         try {
                             proxy.enviaJogada(move);
@@ -112,12 +154,25 @@ public class GameController {
     }
 
     private void updateState(Move move) {
+        updateBoard(move);
+        updateCurrent();
+    }
+
+    private void updateBoard(Move move) {
         int desloc = move.isDirection() ? -1 : 1;
         Player current = gameState.getCurrent_player();
 
-        current.setBoard_position(current.getBoard_position() + desloc * move.getDice_value() % gameState.getBoard().getBoardMap().length);
-        screen.updateState(players);
+        int new_p = (current.getBoard_position() + desloc * move.getDice_value()) % gameState.getBoard().getBoardMap().length;
+        if (new_p < 0) {
+            new_p += gameState.getBoard().getBoardMap().length;
+        }
 
+        current.setBoard_position(new_p);
+        screen.updateState(players);
+    }
+
+    private void updateCurrent() {
+        Player current = gameState.getCurrent_player();
         int novo = (players.indexOf(current) + 1) % players.size();
         gameState.setCurrent_player(players.get(novo));
         Proxy proxy = Proxy.getInstance();

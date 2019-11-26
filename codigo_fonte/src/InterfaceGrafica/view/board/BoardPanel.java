@@ -44,15 +44,15 @@ public class BoardPanel extends JPanel {
         final int size = boardImage.getWidth();
         g.fillOval(0, 0, size, size);
 
-        final boolean[] boardMap = this.board.getBoardMap();
+        final String[] boardMap = this.board.getBoardMap();
         final int angule = 360 / boardMap.length;
         int total_angule = 0;
 
         int cont = 0;
 
-        for (boolean i : boardMap) {
+        for (String i : boardMap) {
             g.setColor(Values.COLORS[cont % Values.COLORS.length]);
-            if (i) {
+            if (i != null) {
                 g.fillArc(0, 0, size, size, total_angule, angule);
                 cont++;
             }

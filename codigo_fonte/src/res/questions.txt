@@ -1,0 +1,302 @@
+{
+   "Geografia":[
+      {
+         "number":1,
+         "question":"O Brasil é de que continente?",
+         "answers":[
+            "América do Norte",
+            "América Central",
+            "América do Sul",
+            "Europa",
+            "Ásia"
+         ],
+         "correct_answer":3
+      },
+      {
+         "number":2,
+         "question":"Qual a capital do acre?",
+         "answers":[
+            "Rio Branco",
+            "Amazônia",
+            "Rondônia",
+            "Macapá",
+            "Acre"
+         ],
+         "correct_answer":1
+      },
+      {
+         "number":3,
+         "question":"Qual desses países não é europeu?",
+         "answers":[
+            "Macedônia",
+            "Espanha",
+            "Grécia",
+            "Casaquistão",
+            "Polônia"
+         ],
+         "correct_answer":4
+      },
+      {
+         "number":4,
+         "question":"Qual desses não é ilha?",
+         "answers":[
+            "Madagascar",
+            "Indonésia",
+            "Barbados",
+            "Bermudas",
+            "Libia"
+         ],
+         "correct_answer":5
+      }
+   ],
+   "Historia":[
+      {
+         "number":1,
+         "question":"Na mitologia grega, Ares é considerado o deus da:",
+         "answers":[
+            "Morte",
+            "Guerra",
+            "Família",
+            "Águas",
+            "Agricultura"
+         ],
+         "correct_answer":2
+      },
+      {
+         "number":2,
+         "question":"Os principais povos da Mesopotâmia, foram:",
+         "answers":[
+            "Sumérios, Caldeus, Babilônios e Assírios",
+            "Ostrogodos, Burgúndios,Hunos e Visigodos",
+            "Persas, Fenícios, Cananeus e Hititas",
+            "Gregos, Romanos, Gauleses e Cretenses",
+            "Toltecas, Olmecas, Maias e Incasre"
+         ],
+         "correct_answer":1
+      },
+      {
+         "number":3,
+         "question":"A história da fundação de Roma está ligada a uma origem mitológica. Qual?",
+         "answers":[
+            "Irmãos Rômulo e Remo amamentados por uma loba",
+            "O labirinto de Creta",
+            "A morte de Cleópatra",
+            "Os 12 trabalhos de Hércules",
+            "O nascimento de Apolo"
+         ],
+         "correct_answer":1
+      },
+      {
+         "number":4,
+         "question":"Entre as características do Período Neolítico, destaca-se:",
+         "answers":[
+            "Sedentarismo e o início da agricultura",
+            "A produção do fogo",
+            "O nomadismo",
+            "A invenção do arco e da flecha",
+            "A fabricação de instrumentos como machados, facas com pedras e ossos pontiagudos"
+         ],
+         "correct_answer":1
+      }
+   ],
+   "Arte e Literatura":[
+      {
+         "number":1,
+         "question":"Qual o herói do livro Os Lusíadas, de Camões?",
+         "answers":[
+            "Pedro Álvares Cabral",
+            "O próprio Camões",
+            "Vasco da Gama",
+            "D. Pedro I",
+            "O livro não trata de nenhum herói"
+         ],
+         "correct_answer":3
+      },
+      {
+         "number":2,
+         "question":"Abaixo estão listados autores brasileiros de várias escolas literárias. Qual deles pertence à escola literária do Romantismo?",
+         "answers":[
+            "Machado de Assis",
+            "Gonçalves Dias",
+            "Gregório de Matos",
+            "Carlos Drummond de Andrade",
+            "Olavo Bilac"
+         ],
+         "correct_answer":2
+      },
+      {
+         "number":3,
+         "question":"Os autores desta escola literária tinham como um dos requisitos principais a perfeição formal do poema (métrica, rimas etc.). O texto se refere ao:",
+         "answers":[
+            "Naturalismo",
+            "Realismo",
+            "Barroco",
+            "Arcadismo",
+            "Parnasianismo"
+         ],
+         "correct_answer":5
+      },
+      {
+         "number":4,
+         "question":"A Segunda Geração do Romantismo também é conhecida como:",
+         "answers":[
+            "Geração Nacionalista",
+            "Geração Pré-Realista",
+            "Condoreirismo",
+            "Geração Ultra-Romântica",
+            "Geração Modernista"
+         ],
+         "correct_answer":4
+      }
+   ],
+   "Desporto e Lazer":[
+      {
+         "number":1,
+         "question":"No rugby, ou futebol americano, qual é o formato da bola usada durante o jogo",
+         "answers":[
+            "Quadrada",
+            "Oval",
+            "Redonda",
+            "Triangular",
+            "Circular"
+         ],
+         "correct_answer":2
+      },
+      {
+         "number":2,
+         "question":"Qual é a cor da faixa mais alta, que pode, muito dificilmente, ser adquirida no judô?",
+         "answers":[
+            "Azul",
+            "Branca",
+            "Preta",
+            "Vermelha",
+            "Marrom"
+         ],
+         "correct_answer":3
+      },
+      {
+         "number":3,
+         "question":"No futebol, quantos cartões, e de que cores respectivamente, é preciso que um jogador receba e seja expulso de uma partida?",
+         "answers":[
+            "3 amarelos e 1 vermelho",
+            "2 amarelos e 1 vermelho",
+            "4 amarelos e 1 vermelho",
+            "3 amarelos",
+            "1 vermelho"
+         ],
+         "correct_answer":5
+      },
+      {
+         "number":4,
+         "question":"No vôlei, o que acontece quando a mão de um jogador bate na rede?",
+         "answers":[
+            "É ponto para o time do jogador",
+            "O time do jogador perde 1 ponto",
+            "O time do jogador é eliminado e o jogo acaba",
+            "É ponto para o time adversário",
+            "É ponto para os dois times"
+         ],
+         "correct_answer":4
+      }
+   ],
+   "Ciencias e Natureza":[
+      {
+         "number":1,
+         "question":"Qual das opções abaixo não é um osso do corpo humano?",
+         "answers":[
+            "Ílio",
+            "Sacro",
+            "Falange",
+            "Patela",
+            "Deltoide"
+         ],
+         "correct_answer":5
+      },
+      {
+         "number":2,
+         "question":"O que acontece em uma cadeia alimentar?",
+         "answers":[
+            "os presos realizam duas refeições diárias (almoço e jantar)",
+            "os animais presos em locais de difícil acesso não conseguem se alimentar",
+            "um grupo de animais forma uma fila, que organiza sua alimentação",
+            "organismos estabelecem relação de alimentação em um ecossistema",
+            "o animal que não convive em harmonia com os demais é excluído da refeição"
+         ],
+         "correct_answer":4
+      },
+      {
+         "number":3,
+         "question":"Bacilo é uma bactéria cuja célula tem forma de:",
+         "answers":[
+            "Círculo",
+            "Bastonete",
+            "Esfera",
+            "Retângulo",
+            "Triângulo"
+         ],
+         "correct_answer":2
+      },
+      {
+         "number":4,
+         "question":"O que significa abiótico?",
+         "answers":[
+            "um animal que vive apenas na água",
+            "um fator responsável pela temperatura terrestre",
+            "um componente não vivo do meio ambiente",
+            "uma parte do olho humano",
+            "um tecido localizado nos pulmões"
+         ],
+         "correct_answer":3
+      }
+   ],
+   "Entretenimento":[
+      {
+         "number":1,
+         "question":"Qual o personagem principal de Simpsons?",
+         "answers":[
+            "Maggie",
+            "Lisa",
+            "Homer",
+            "Bart",
+            "Marge"
+         ],
+         "correct_answer":3
+      },
+      {
+         "number":2,
+         "question":"Em Monstros SA, qual é o código para avisar ao pessoal da segurança, que algo do mundo humano foi avistado no mundo dos monstros, que é gritado várias vezes durante o filme?",
+         "answers":[
+            "23-19",
+            "26-18",
+            "19-22",
+            "19-22",
+            "33-16"
+         ],
+         "correct_answer":1
+      },
+      {
+         "number":3,
+         "question":"Em Game of Thrones, quem matou o rei Aerys II Targaryen, mais conhecido como o Rei Louco?",
+         "answers":[
+            "Tywin Lannister",
+            "Sor Barristen Selmy",
+            "Tyrion Lannister",
+            "Jaime Lannister",
+            "Jon Snow"
+         ],
+         "correct_answer":4
+      },
+      {
+         "number":4,
+         "question":"Qual é o nome do Elfo-doméstico em que Harry Potter ajudou a ter liberdade?",
+         "answers":[
+            "Monstro",
+            "Encantado",
+            "Mestiço",
+            "Dudo",
+            "Dobby"
+         ],
+         "correct_answer":5
+      }
+   ]
+}
