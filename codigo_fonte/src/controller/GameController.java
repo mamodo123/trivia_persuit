@@ -9,7 +9,6 @@ import br.ufsc.inf.leobr.cliente.exception.NaoJogandoException;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import model.Board;
-import model.BoardFactory;
 import model.Move;
 import model.Player;
 
@@ -37,7 +36,7 @@ public class GameController {
                 getClass().getResource("/res/questions.txt").getFile()
         );
 
-        try (Scanner scanner = new Scanner(file,"utf-8")) {
+        try (Scanner scanner = new Scanner(file, "utf-8")) {
             String json = scanner.useDelimiter("\\A").next();
             questions = new Gson().fromJson(json, Map.class);
         } catch (FileNotFoundException e) {
@@ -61,7 +60,7 @@ public class GameController {
                     }
                 });
 
-                for (String i: names) {
+                for (String i : names) {
                     players.add(new Player(i, 0));
                 }
 
@@ -98,7 +97,6 @@ public class GameController {
                     if (gameState.getCurrent_player().getName().equals(proxy.getNomeJogador())) {
                         Random gerador = new Random();
                         int random = gerador.nextInt(6) + 1;
-                        random = 5;
                         JOptionPane.showMessageDialog(null, gameState.getCurrent_player().getName() + " rolou o dado: " + (random));
                         String[] buttons = {"Esquerda", "Direita"};
                         boolean direcao = JOptionPane.showOptionDialog(null,
@@ -122,7 +120,7 @@ public class GameController {
                             System.out.println(mcat);
                             int qrandom = gerador.nextInt(mcat.size());
                             System.out.println(mcat.get(qrandom));
-                            HashMap<String, Object> mquestion = new HashMap<>((LinkedTreeMap)mcat.get(qrandom));
+                            HashMap<String, Object> mquestion = new HashMap<>((LinkedTreeMap) mcat.get(qrandom));
 
                             String question = (String) mquestion.get("question");
                             int answer = ((Double) mquestion.get("correct_answer")).intValue() - 1;
@@ -200,10 +198,12 @@ public class GameController {
          *
          */
         private static final long serialVersionUID = 1L;
+
         public SwingAction() {
             putValue(NAME, "conectar");
             putValue(SHORT_DESCRIPTION, "conectar a Netgames Server");
         }
+
         public void actionPerformed(ActionEvent e) {
             if (!em_partida) {
                 String servidor = JOptionPane.showInputDialog("Qual o servidor?");
@@ -211,33 +211,39 @@ public class GameController {
                 String mensagem = atorJogador.conectar(servidor, name);
                 JOptionPane.showMessageDialog(null, mensagem);
             } else {
-                JOptionPane.showMessageDialog(null,  "Partida já em andamento!");
+                JOptionPane.showMessageDialog(null, "Partida já em andamento!");
             }
         }
     }
+
     private class SwingAction_1 extends AbstractAction {
         /**
          *
          */
         private static final long serialVersionUID = 1L;
+
         public SwingAction_1() {
             putValue(NAME, "desconectar");
             putValue(SHORT_DESCRIPTION, "desconectar de Netgames Server");
         }
+
         public void actionPerformed(ActionEvent e) {
             String mensagem = atorJogador.desconectar();
             JOptionPane.showMessageDialog(null, mensagem);
         }
     }
+
     private class SwingAction_2 extends AbstractAction {
         /**
          *
          */
         private static final long serialVersionUID = 1L;
+
         public SwingAction_2() {
             putValue(NAME, "iniciar partida");
             putValue(SHORT_DESCRIPTION, "iniciar partida do seu jogo");
         }
+
         public void actionPerformed(ActionEvent e) {
             String mensagem = atorJogador.iniciarPartida();
             JOptionPane.showMessageDialog(null, mensagem);
