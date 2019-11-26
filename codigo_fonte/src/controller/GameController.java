@@ -99,7 +99,7 @@ public class GameController {
                     if (gameState.getCurrent_player().getName().equals(proxy.getNomeJogador())) {
                         Random gerador = new Random();
                         int random = gerador.nextInt(6) + 1;
-                        random = 5;
+//                        random = 5;
                         JOptionPane.showMessageDialog(null, gameState.getCurrent_player().getName() + " rolou o dado: " + (random));
                         String[] buttons = {"Esquerda", "Direita"};
                         boolean direcao = JOptionPane.showOptionDialog(null,
@@ -204,7 +204,7 @@ public class GameController {
                     + "\nResposta correta: " + question.getRight_answer();
             JOptionPane.showMessageDialog(null, text);
 
-            if (current.getCategorys().size() == /*questions.size()*/1) {
+            if (current.getCategorys().size() == questions.size()) {
                 JOptionPane.showMessageDialog(null, name + " ganhou o jogo!");
                 try {
                     if (!current.getName().equals(proxy.getNomeJogador())) {
@@ -218,6 +218,7 @@ public class GameController {
                     return;
                 }
             }
+            screen.updateState(players);
         }
 
         int novo = (players.indexOf(current) + 1) % players.size();

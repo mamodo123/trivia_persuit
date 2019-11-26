@@ -27,4 +27,11 @@ public class Board{
         }
     }
 
+    public String[] getQuestions_type() {
+        return questions_type;
+    }
+
+    public void setQuestions_type(String[] questions_type) {
+        this.questions_type = questions_type;
+    }
 }

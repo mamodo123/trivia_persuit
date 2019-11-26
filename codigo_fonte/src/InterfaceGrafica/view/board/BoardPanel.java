@@ -80,7 +80,6 @@ public class BoardPanel extends JPanel {
             System.out.println(Values.ERROR_IMAGE);
         }
 
-        //TODO
         final double start_x = (size >> 1) + ((size - Values.STROKE) >> 1) * Math.cos(Math.toRadians(angule >> 1));
         final double start_y = (size >> 1) - ((size - Values.STROKE) >> 1) * Math.sin(Math.toRadians(angule >> 1));
         g.setFont(new Font("Helvetica", Font.BOLD,24));
@@ -95,27 +94,51 @@ public class BoardPanel extends JPanel {
         final int angule = 360 / board.getBoardMap().length;
         final int stroke_size = Values.STROKE / 2;
         final HashMap<Integer, ArrayList<Player>> map = Helper.agrup_array(players);
-        System.out.println("");
         final int size = state.getWidth();
-        //TODO
-        int cont = 0;
-        //
+
         for (int posicao : map.keySet()) {
             ArrayList<Player> players_by_position = map.get(posicao);
             int quantity = players_by_position.size();
 
             int size_quantity = stroke_size / (quantity);
             for (int i = 0; i < quantity; i++) {
-                g.setColor(Color.CYAN);
                 final double a = Math.toRadians(angule * posicao + (angule >> 1));
                 final int b = size - size_quantity * i * 2 - stroke_size / quantity;
                 final double endXPiece = (size + b * Math.cos(a)) / 2;
                 final double endYPiece = (size - b * Math.sin(a)) / 2;
-                g.fillOval((int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2, size_quantity, size_quantity);
-                //TODO
-                g.setColor(Color.BLACK);
-                g.setFont(new Font("Helvetica",Font.PLAIN,20));
+
+                BufferedImage player_image = new BufferedImage(size_quantity, size_quantity, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D gplayer = (Graphics2D) player_image.getGraphics();
+                gplayer.setColor(Color.gray);
+                gplayer.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                gplayer.fillOval(0, 0, size_quantity, size_quantity);
+
+                String[] values = board.getQuestions_type();
                 Player player = players_by_position.get(i);
+
+                int pangule = 360 / values.length;
+                int total_pangule = 0;
+
+                for (int u = 0; u < values.length; u++) {
+                    if (player.getCategorys().contains(values[u])) {
+                        gplayer.setColor(Values.COLORS[u]);
+                        gplayer.fillArc(0, 0, size_quantity, size_quantity, total_pangule, pangule);
+                    }
+
+                    final double endX = (size_quantity >> 1) + (size_quantity >> 1) * Math.cos(Math.toRadians(total_pangule));
+                    final double endY = (size_quantity >> 1) + (size_quantity >> 1) * Math.sin(Math.toRadians(total_pangule));
+
+                    gplayer.setColor(Values.LINES);
+                    gplayer.drawLine(size_quantity / 2, size_quantity / 2, (int) endX, (int) endY);
+
+                    total_pangule += pangule;
+                }
+
+                g.drawImage(player_image, (int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2, null);
+
+//                g.fillOval((int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2, size_quantity, size_quantity);
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Helvetica", Font.PLAIN,20 / quantity));
                 g.drawString(player.getName(), (int) endXPiece - size_quantity / 2, (int) endYPiece - size_quantity / 2 + size_quantity / 2);
             }
 
