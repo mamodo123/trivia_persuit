@@ -5,6 +5,7 @@ import InterfaceGrafica.Screen;
 import Rede.AtorNetgames;
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.Proxy;
+import br.ufsc.inf.leobr.cliente.exception.NaoConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoJogandoException;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -117,11 +118,8 @@ public class GameController {
                         String category = board.getBoardMap()[position];
                         if (category != null) {
                             JOptionPane.showMessageDialog(null, "Você tirou " + category + "!");
-                            System.out.println(category);
                             ArrayList<Object> mcat = (ArrayList<Object>) questions.get(category);
-                            System.out.println(mcat);
                             int qrandom = gerador.nextInt(mcat.size());
-                            System.out.println(mcat.get(qrandom));
                             HashMap<String, Object> mquestion = new HashMap<>((LinkedTreeMap) mcat.get(qrandom));
 
                             String question = (String) mquestion.get("question");
@@ -186,14 +184,16 @@ public class GameController {
         Player current = gameState.getCurrent_player();
         Proxy proxy = Proxy.getInstance();
         if (question != null) {
+            String name;
             String text = "";
-            if (gameState.getCurrent_player().getName().equals(proxy.getNomeJogador())) {
-                text += "Você";
+            if (current.getName().equals(proxy.getNomeJogador())) {
+                name = "Você";
             } else {
-                text += gameState.getCurrent_player().getName();
+                name = gameState.getCurrent_player().getName();
             }
+            text += name;
             if (question.isAcertou()) {
-                gameState.getCurrent_player().getCategorys().add(question.getCategory());
+                current.getCategorys().add(question.getCategory());
                 text += " acertou!";
             } else {
                 text += " errou!";
@@ -203,6 +203,21 @@ public class GameController {
                     + "\nResposta dada: " + question.getAnswer()
                     + "\nResposta correta: " + question.getRight_answer();
             JOptionPane.showMessageDialog(null, text);
+
+            if (current.getCategorys().size() == /*questions.size()*/1) {
+                JOptionPane.showMessageDialog(null, name + " ganhou o jogo!");
+                try {
+                    if (!current.getName().equals(proxy.getNomeJogador())) {
+                        proxy.finalizarPartida();
+                    }
+                } catch (NaoConectadoException | NaoJogandoException e) {
+                    e.printStackTrace();
+                } finally {
+                    players = new ArrayList<>();
+                    screen.updateState(players);
+                    return;
+                }
+            }
         }
 
         int novo = (players.indexOf(current) + 1) % players.size();
