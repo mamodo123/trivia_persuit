@@ -1,0 +1,69 @@
+==================================================================
+==========================Release Notes==========================
+==================================================================
+Trivial Pursuit v1.0  29/11/2019
+
+Projeto desenvolvidor por:
+- Alexandre Muller
+- Cainã Esteche
+- Fernanda Narloch
+==================================================================
+
+Sumário
+
+1. Requisitos do sistema
+2. Instalação
+3. Versão atual e seus aspectos
+4. Restrições
+5. Melhorias para próximas versões
+
+==================================================================
+1. Requisitos do sistema
+==================================================================
+
+Para executar o jogo é necessário:
+- Java Runtime Environment (JRE) instalado na máquina, na versão 7 ou superior
+- O servidor do NetGames para jogar em localhost
+
+==================================================================
+2. Instalação e execução
+==================================================================
+
+- Descompactar o arquivo trivial_pursuit.zip que contém:
+	 pasta: codigo_fonte
+	 pasta: documentos
+	 pasta: executavel
+	 pasta: servidor
+	 ReleaseNotes.txt
+- Não é necessário instalar o jogo para que ele seja executado.
+- Para executar o jogo há duas possibilidades:
+	1º - Diretamente no arquivo "trivial_pursuit.jar" (que consta na pasta Executavel)
+	2º - Através da linha de comando:
+	Dentro do diretório onde consta o arquivo "trivial_pursuit.jar" executar o comando: "java -jar trivial_pursuit.jar"
+- É recomendável executar o jogo via a mesma máquina usando o servidor contido na pasta "servidor". 
+
+==================================================================
+3. Versão atual e seus aspectos
+==================================================================
+
+- O jogo encontra-se na sua primeira versão, possui uma interface simples com o tabuleiro e dois botões.
+- As ações que podem ser realizadas pelo jogador incluem rolar dado, escolher sentido do movimento e responder pergunta.
+- Os jogadores podem se movimentar em qualquer sentido dentro do tabuleiro.
+- O banco de perguntas contém 4 perguntas e respostas por área de conhecimento (totalizando 24).
+- As ações do tabuleiro são enviadas por jogadas inteiras ao jogador adversário (sem atualizações parciais).
+
+==================================================================
+4. Restrições
+==================================================================
+
+- O jogador não ganha peças repetidas por áreas de conhecimento. Deve-se adquirir uma por área.
+
+
+==================================================================
+5. Melhorias para próximas versões
+==================================================================
+
+- Melhorias na interface gráfica com reposicionamento de botões.
+- Alterar o código para que sejam enviadas jogadas parciais, para que o jogador possa acompanhar os passos das jogadas do adversário.
+- Adição de mais perguntas ao banco.
+
